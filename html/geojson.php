@@ -57,16 +57,20 @@ foreach ($GLOBALS['cache']['devices']['id'] as $device)
         {
           $state = 'down';
           $location_name = ($lon['down_hosts'][0]['location'] === '' ? OBS_VAR_UNSET : $lon['down_hosts'][0]['location']);
+          // Get Purpose (Description) using $lon to show in Popup
+          $getPurpose = $lon['down_hosts'][0]['purpose'];
           $location_url  = generate_location_url($lon['down_hosts'][0]['location']);
         }
         elseif ($num_up > 0)
         {
           $state = 'up';
           $location_name = ($lon['up_hosts'][0]['location'] === '' ? OBS_VAR_UNSET : $lon['up_hosts'][0]['location']);
+          // Get Purpose (Description) using $lon to show in Popup
+          $getPurpose = $lon['up_hosts'][0]['purpose'];
           $location_url  = generate_location_url($lon['up_hosts'][0]['location']);
         }
 
-        $tooltip = "<h3>".$location_name."</h3><hr />".$tooltip;
+        $tooltip = "<h3>".$getPurpose."</h3><hr />".$tooltip;
         foreach ($lon["down_hosts"] as $down_host) {
           $tooltip .= '<span class="label label-error">' . escape_html($down_host['hostname']) .'</span> ';
         }
